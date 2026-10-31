@@ -12,6 +12,14 @@
     }
 }
 
+svg {
+    display: block;
+    /* Remove espaço inline extra */
+    width: 100%;
+    /* Ajuste conforme necessário */
+    height: auto;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -20,7 +28,7 @@
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #ffffff;
+    background-color: #e7cdf7;
     color: #333;
     line-height: 1.6;
 }

@@ -1,26 +1,31 @@
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+
+/* Quando a tela tiver até 768px */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-color: #daddec;
 }
 
 form {
     border: 1px solid #ccc;
     padding: 30px;
     border-radius: 10px;
-}
-
-.btn-login {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #7c3aed, #6d28d9);
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    font-style: italic;
+    background-color: rgb(255, 255, 255);
+    text-align: center
 }
 
 .divisor {
@@ -73,13 +78,58 @@ form {
     font-weight: bold;
 }
 
-.Login a {
-    color: #7c3aed;
-    text-decoration: none;
-    font-weight: bold;
+.cadastro-form {
+    width: 400px;
+    max-width: 90%;
+    padding: 40px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
-.Login {
-    text-align: center;
-    margin-top: 30px;
+.login form input {
+    display: block;
+    width: 90%;
+    height: 48px;
+    margin: 0 auto 20px auto;
+    padding: 0 15px;
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+.cadastro-form input {
+    display: block;
+    width: 90%;
+    height: 48px;
+    margin: 0 auto 20px;
+    padding: 0 15px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background-color: #f8f8fa;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #7c3aed, #6d28d9);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    font-style: italic;
+}
+
+.logo {
+    display: block;
+    width: 300px;
+    height: auto;
+    margin: 0 auto 35px;
+    flex-shrink: 0;
 }
