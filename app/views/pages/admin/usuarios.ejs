@@ -1,0 +1,56 @@
+<h1>Usuários</h1>
+
+<form class="filtros" action="/admin/usuarios" method="get" role="search">
+  <p class="campo">
+    <label for="busca">Buscar por nome ou e-mail</label>
+    <input id="busca" type="search" data-filtrar="#corpo-usuarios" data-contador="#contador-usuarios" data-singular="usuário encontrado" data-plural="usuários encontrados">
+  </p>
+  <p class="campo">
+    <label for="tipo">Tipo</label>
+    <select id="tipo" name="tipo">
+      <option value="">Todos</option>
+      <% ['candidato', 'empresa', 'admin'].forEach(function (t) { %>
+        <option<%= t === tipo ? ' selected' : '' %>><%= t %></option>
+      <% }) %>
+    </select>
+  </p>
+  <button class="botao" type="submit">Filtrar</button>
+</form>
+
+<p role="status" id="contador-usuarios"><%= usuarios.length %> <%= usuarios.length === 1 ? 'usuário encontrado' : 'usuários encontrados' %>.</p>
+
+<section class="rolagem" tabindex="0" aria-label="Tabela de usuários">
+  <table class="tabela" data-ordenavel>
+    <thead>
+      <tr>
+        <th scope="col"><button type="button" class="ordenar">Nome</button></th>
+        <th scope="col"><button type="button" class="ordenar">E-mail</button></th>
+        <th scope="col"><button type="button" class="ordenar">Tipo</button></th>
+        <th scope="col"><button type="button" class="ordenar">Cadastro</button></th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody id="corpo-usuarios">
+      <% usuarios.forEach(function (u) { %>
+        <tr>
+          <td data-rotulo="Nome"><%= u.nome %></td>
+          <td data-rotulo="E-mail"><%= u.email %></td>
+          <td data-rotulo="Tipo"><%= u.tipo %></td>
+          <td data-rotulo="Cadastro" data-ordem="<%= u.criadoEm || '' %>"><%= u.criadoEm ? new Date(u.criadoEm).toLocaleDateString('pt-BR') : '—' %></td>
+          <td data-rotulo="Ações" class="acoes-tabela">
+            <% if (u.tipo === 'candidato') { %>
+              <form action="/admin/usuarios/<%= u.id %>/admin" method="post" data-confirmar="Tornar <%= u.nome %> administrador(a)?">
+                <button type="submit" class="botao contorno">Tornar admin</button>
+              </form>
+            <% } %>
+            <% if (u.tipo !== 'admin') { %>
+              <form action="/admin/usuarios/<%= u.id %>/excluir" method="post" data-confirmar="Excluir <%= u.nome %> e tudo que ele(a) publicou?">
+                <button type="submit" class="botao perigo">Excluir</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>

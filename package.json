@@ -1,18 +1,18 @@
 {
   "name": "newworky",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "NewWorky - vagas, empresas e cursos (Express + EJS)",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "ejs": "^6.0.1",
-    "express": "^5.2.1",
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.10",
+    "express": "^4.22.3",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.19.0",
     "express-validator": "^7.3.2"
   }
 }

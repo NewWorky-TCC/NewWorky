@@ -1,0 +1,47 @@
+<h1>Cursos</h1>
+
+<section class="cartao" aria-labelledby="novo-curso">
+  <h2 id="novo-curso">Novo curso</h2>
+  <form action="/admin/cursos" method="post">
+    <%- include('../../partials/campo', { rotulo: 'Título', nome: 'titulo' }) %>
+    <%- include('../../partials/campo', { rotulo: 'Área', nome: 'categoria', opcoes: categorias }) %>
+    <%- include('../../partials/campo', { rotulo: 'Nível', nome: 'nivel', opcoes: niveis }) %>
+    <%- include('../../partials/campo', { rotulo: 'Carga horária (horas)', nome: 'horas', tipo: 'number' }) %>
+    <%- include('../../partials/campo', { rotulo: 'Descrição', nome: 'descricao', tipo: 'textarea', linhas: 3 }) %>
+    <p class="campo">
+      <label><input type="checkbox" name="gratuito"<%= valores.gratuito ? ' checked' : '' %>> Curso gratuito</label>
+    </p>
+    <button class="botao" type="submit">Criar curso</button>
+  </form>
+</section>
+
+<p role="status" id="contador-cursos"><%= cursos.length %> <%= cursos.length === 1 ? 'curso cadastrado' : 'cursos cadastrados' %>.</p>
+
+<section class="rolagem" tabindex="0" aria-label="Tabela de cursos">
+  <table class="tabela" data-ordenavel>
+    <thead>
+      <tr>
+        <th scope="col"><button type="button" class="ordenar">Título</button></th>
+        <th scope="col"><button type="button" class="ordenar">Área</button></th>
+        <th scope="col"><button type="button" class="ordenar">Nível</button></th>
+        <th scope="col"><button type="button" class="ordenar">Horas</button></th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cursos.forEach(function (c) { %>
+        <tr>
+          <td data-rotulo="Título"><%= c.titulo %> <% if (c.gratuito) { %><strong class="selo">Gratuito</strong><% } %></td>
+          <td data-rotulo="Área"><%= c.categoria %></td>
+          <td data-rotulo="Nível"><%= c.nivel %></td>
+          <td data-rotulo="Horas"><%= c.horas %></td>
+          <td data-rotulo="Ações" class="acoes-tabela">
+            <form action="/admin/cursos/<%= c.id %>/excluir" method="post" data-confirmar="Excluir o curso &quot;<%= c.titulo %>&quot;?">
+              <button type="submit" class="botao perigo">Excluir</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>

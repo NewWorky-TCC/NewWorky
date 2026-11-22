@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NewWorky: vagas de emprego, cursos e match entre candidatos e empresas.">
+  <title><%= titulo %></title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/site.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/js/acessibilidade.js" defer></script>
+  <script src="/js/geral.js" defer></script>
+  <script src="/js/formularios.js" defer></script>
+  <script src="/js/listas.js" defer></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <%- include('../partials/header') %>
+
+  <main id="conteudo">
+    <% if (aviso) { %>
+      <p class="aviso" role="status"><%= aviso %></p>
+    <% } %>
+    <%- body %>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

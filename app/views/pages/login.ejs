@@ -4,47 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - NewWorky</title>
+    <title><%= titulo %></title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/css/login.css">
+    <script src="/js/login.js" defer></script>
 </head>
 
 <body>
     <figure>
-        <form class="login-form">
+        <form class="login-form" action="/login" method="post">
 
             <img class="logo" src="/imagens/Logo NewWorky.svg" alt="Logo NewWorky">
 
             <h1>Bem-vindo de volta!</h1>
             <p>Faça login para acessar sua conta</p>
 
-            <input type="email" placeholder="E-mail">
+            <% if (aviso) { %><p class="aviso" role="status"><%= aviso %></p><% } %>
+            <% if (erro) { %><p class="erro" role="alert"><%= erro %></p><% } %>
+
+            <input type="email" name="email" placeholder="E-mail" aria-label="E-mail" value="<%= email %>" autocomplete="email" required>
             <br>
 
-            <input type="password" id="uePassowrd" placeholder="Senha">
-            <button class="submit-eye" type="button" onclick="mostrarSenha()">
-        <i id="ueEyePass" class="fa fa-eye"></i>
-    </button>
+            <span class="campo-senha">
+                <input type="password" name="senha" id="uePassowrd" placeholder="Senha" aria-label="Senha" autocomplete="current-password" required>
+                <button class="submit-eye" type="button" onclick="mostrarSenha()" aria-label="Mostrar senha">
+                    <span id="ueEyePass" aria-hidden="true">👁</span>
+                </button>
+            </span>
             <br>
 
             <button class="btn-login" type="submit">
                 Entrar
             </button>
 
-            <div class="divisor">
-                <span></span>
-                <p>ou continue com</p>
-                <span></span>
-            </div>
-
-            <p class="cadastro">
+            <p class="Login">
                 Não tem uma conta?
                 <a href="/cadastro">Cadastre-se</a>
             </p>
 
+            <p class="Login">
+                <a href="/">Voltar para o site</a>
+            </p>
+
         </form>
     </figure>
-
-    <script src="/js/login.js"></script>
 </body>
 
 </html>

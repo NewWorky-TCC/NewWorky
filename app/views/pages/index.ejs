@@ -1,217 +1,74 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<section class="hero">
+  <h1>Conectamos você ao trabalho que <span class="destaque-texto">combina com você.</span></h1>
+  <p class="lead">O NewWorky faz o match entre candidatos e empresas, com vagas, cursos e um site pensado para todas as pessoas.</p>
+  <p>
+    <a class="botao grande" href="/vagas">Quero encontrar vagas</a>
+    <a class="botao contorno grande" href="/cadastro?tipo=empresa">Cadastrar empresa</a>
+  </p>
+  <ul class="numeros" aria-label="Números da plataforma">
+    <li><strong><%= totais.vagas %></strong> vagas abertas</li>
+    <li><strong><%= totais.empresas %></strong> empresas</li>
+    <li><strong><%= totais.cursos %></strong> cursos</li>
+  </ul>
+</section>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewWorky</title>
-    <link rel="stylesheet" href="/css/estilo.css">
-</head>
+<section aria-labelledby="busca">
+  <h2 id="busca">Buscar vagas</h2>
+  <form class="filtros" action="/vagas" method="get" role="search">
+    <p class="campo">
+      <label for="q">Cargo, empresa ou habilidade</label>
+      <input id="q" name="q" type="search" placeholder="Ex.: React, designer, dados">
+    </p>
+    <p class="campo">
+      <label for="local">Localização</label>
+      <input id="local" name="local" type="text" placeholder="Cidade ou Remoto">
+    </p>
+    <button class="botao" type="submit">Buscar</button>
+  </form>
+</section>
 
-<body>
+<section aria-labelledby="recentes">
+  <h2 id="recentes">Vagas recentes</h2>
+  <ul class="grade">
+    <% vagas.forEach(function (vaga) { %>
+      <%- include('../partials/vaga-card', { vaga: vaga }) %>
+    <% }) %>
+  </ul>
+  <p><a href="/vagas">Ver todas as vagas</a></p>
+</section>
 
-    <header>
-        <h1>
-            <span class="new">New</span><span class="worky">Worky</span>
-        </h1>
+<section aria-labelledby="como">
+  <h2 id="como">Como funciona</h2>
+  <ol class="grade passos">
+    <li class="cartao"><h3>Crie seu perfil</h3><p>Informe sua área, cidade e habilidades.</p></li>
+    <li class="cartao"><h3>Receba matches</h3><p>Veja a compatibilidade de cada vaga com o seu perfil.</p></li>
+    <li class="cartao"><h3>Prepare-se</h3><p>Faça cursos para fortalecer sua candidatura.</p></li>
+    <li class="cartao"><h3>Candidate-se</h3><p>Envie sua candidatura e acompanhe no painel.</p></li>
+  </ol>
+</section>
 
-        <nav>
-            <ul>
-                <li><a href="#">Vagas</a></li>
-                <li><a href="#">Empresas</a></li>
-                <li><a href="#">Cursos</a></li>
-                <li><a href="#">Plano</a></li>
-                <li><a href="#">Para Empresas</a></li>
-            </ul>
-        </nav>
+<section aria-labelledby="cursos-home">
+  <h2 id="cursos-home">Cursos para você</h2>
+  <ul class="grade">
+    <% cursos.forEach(function (curso) { %>
+      <%- include('../partials/curso-card', { curso: Object.assign({}, curso, { progresso: null }) }) %>
+    <% }) %>
+  </ul>
+  <p><a href="/cursos">Ver todos os cursos</a></p>
+</section>
 
-        <aside>
-            <button><img src="https://imgs.search.brave.com/jzyMaXTDaoR9Mkcg0Vry3t8gt73Qfs0E-5e1fcO96jk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/aWNvbnNjb3V0LmNv/bS9pY29uL3ByZW1p/dW0vcG5nLTI1Ni10/aHVtYi9ub3RpZmlj/YWNvZXMtMTI1MzEw/NzgtMTAzMTI2NzQu/cG5nP2Y9d2VicCZ3/PTEyOA" alt="sino de notificação"></button>
-
-            <figure>
-                <a href="/login">
-                    <img src='https://imgs.search.brave.com/W4ZWT3XO1K5CyJav-YS7DRCvXCqu-WH2sc3brrUqY5I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LnBleGVscy5j/b20vYWlnYy1idW5k/bGUvaW1hZ2VzLzc2/NmFmODhjLWI5NDkt/NGUyNi04MzJlLWNk/YTc1MmQzMWZiYy5q/cGc' alt='silhoueta de perfil de usuário'>
-                </a>
-
-
-                </button>
-                <figcaption>Olá, Camila</figcaption>
-            </figure>
-        </aside>
-    </header>
-
-    <main>
-
-        <section aria-label="Hero">
-
-            <article>
-                <figure>
-                    <p>+12.000 vagas novas esta semana</p>
-                </figure>
-                <h2>
-                    Conectamos você ao <span style="color: #2563eb"> trabalho que combina</span> com você.
-                </h2>
-                <p>
-                    O NewWorky usa tecnologia e inteligência para criar o match perfeito entre candidatos e empresas.
-                </p>
-
-                <menu>
-                    <li><button>Quero encontrar vagas</button></li>
-                    <li><button>Cadastrar empresa</button></li>
-                </menu>
-
-                <ul>
-                    <li>4.2M+ Candidatos</li>
-                    <li>38k+ Empresas</li>
-                    <li>21k+ Contratações/mês</li>
-                </ul>
-            </article>
-
-            <aside>
-                <figure>
-                    <img src="user.jpg" alt="">
-                    <figcaption>Você</figcaption>
-                </figure>
-
-                <output>92%</output>
-
-                <figure>
-                    <img src="empresa.jpg" alt="">
-                    <figcaption>Empresa</figcaption>
-                </figure>
-
-                <button>Conectar perfil</button>
-            </aside>
-
-        </section>
-
-        <section aria-label="Pesquisa de vagas">
-
-            <form>
-                <label>
-<input
-                    type="text"
-                    placeholder="Cargo, empresa ou habilidade">
-</label>
-
-                <label>
-<input
-                    type="text"
-                    placeholder="Localização">
-</label>
-
-                <button>Buscar vagas</button>
-            </form>
-
-            <nav>
-                <ul>
-                    <li><button>Remoto</button></li>
-                    <li><button>Desenvolvimento</button></li>
-                    <li><button>Tecnologia</button></li>
-                    <li><button>UX/UI</button></li>
-                    <li><button>Marketing</button></li>
-                    <li><button>Dados</button></li>
-                </ul>
-            </nav>
-
-        </section>
-
-        <section aria-label="Como funciona">
-
-            <header>
-                <h2>Como o NewWorky funciona</h2>
-                <p>Simples, rápido e eficiente.</p>
-            </header>
-
-            <ol>
-                <li>
-                    <h3>Crie seu perfil</h3>
-                    <p>Monte um perfil completo.</p>
-                </li>
-
-                <li>
-                    <h3>Receba matches</h3>
-                    <p>Nossa IA analisa seu perfil.</p>
-                </li>
-
-                <li>
-                    <h3>Prepare-se</h3>
-                    <p>Acesse materiais exclusivos.</p>
-                </li>
-
-                <li>
-                    <h3>Conquiste oportunidades</h3>
-                    <p>Acompanhe o andamento.</p>
-                </li>
-            </ol>
-
-        </section>
-
-        <section aria-label="Vagas em destaque">
-
-            <header>
-                <h2>Vagas em destaque para você</h2>
-                <a href="#">Ver todas</a>
-            </header>
-
-            <article>
-                <h3>Senior Frontend Developer</h3>
-                <p>94% Match</p>
-                <p>R$18k–24k</p>
-            </article>
-
-            <article>
-                <h3>Product Designer</h3>
-                <p>87% Match</p>
-                <p>R$12k–16k</p>
-            </article>
-
-            <article>
-                <h3>Data Scientist</h3>
-                <p>81% Match</p>
-                <p>R$20k–28k</p>
-            </article>
-
-        </section>
-
-    </main>
-
-    <aside>
-        <section>
-            <h2>Cursos para você</h2>
-            <article>
-                <h3>React Avançado com TypeScript</h3>
-                <p>4.9 ★</p>
-            </article>
-
-            <article>
-                <h3>Product Management na Prática</h3>
-                <p>4.8 ★</p>
-            </article>
-
-            <article>
-                <h3>Data Science com Python</h3>
-                <p>4.7 ★</p>
-            </article>
-
-        </section>
-
-        <section>
-            <h2>Seu progresso</h2>
-            <progress value="78" max="100">78%</progress>
-        </section>
-
-        <section>
-            <h2>Média salarial</h2>
-            <p>R$ 14.800</p>
-        </section>
-
-    </aside>
-
-    <footer>
-        <small>© 2025 NewWorky</small>
-    </footer>
-
-</body>
-
-</html>
+<section aria-labelledby="faq">
+  <h2 id="faq">Perguntas frequentes</h2>
+  <details>
+    <summary>O NewWorky é gratuito?</summary>
+    <p>Sim. Candidatos podem criar conta, buscar vagas e fazer cursos gratuitos. Há planos pagos com recursos extras.</p>
+  </details>
+  <details>
+    <summary>Como funciona o match?</summary>
+    <p>Comparamos sua área e suas habilidades com a vaga e mostramos uma pontuação de compatibilidade.</p>
+  </details>
+  <details>
+    <summary>Minha empresa pode publicar vagas?</summary>
+    <p>Sim. <a href="/cadastro?tipo=empresa">Cadastre sua empresa</a> e publique pelo painel.</p>
+  </details>
+</section>

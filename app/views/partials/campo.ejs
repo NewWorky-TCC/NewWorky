@@ -1,0 +1,31 @@
+<%
+  /* Campo de formulário reutilizável.
+     Parâmetros: rotulo, nome (obrigatórios) | tipo, opcoes, dica, linhas, auto (opcionais).
+     Usa as variáveis valores e erros da página, se existirem. */
+  const valor = (locals.valores && locals.valores[nome]) || '';
+  const erro = locals.erros && locals.erros[nome];
+  const id = 'campo-' + nome;
+  let ligacoes = '';
+  if (locals.dica) ligacoes += 'dica-' + nome + ' ';
+  if (erro) ligacoes += 'erro-' + nome;
+%>
+<p class="campo">
+  <label for="<%= id %>"><%= rotulo %></label>
+
+  <% if (locals.opcoes) { %>
+    <select id="<%= id %>" name="<%= nome %>"<% if (erro) { %> aria-invalid="true" aria-describedby="<%= ligacoes %>"<% } %>>
+      <option value="">Selecione</option>
+      <% opcoes.forEach(function (op) { %>
+        <option<%= op === valor ? ' selected' : '' %>><%= op %></option>
+      <% }) %>
+    </select>
+  <% } else if (locals.tipo === 'textarea') { %>
+    <textarea id="<%= id %>" name="<%= nome %>" rows="<%= locals.linhas || 4 %>"<% if (erro) { %> aria-invalid="true" aria-describedby="<%= ligacoes %>"<% } %>><%= valor %></textarea>
+  <% } else { %>
+    <%# senha nunca volta preenchida %>
+    <input id="<%= id %>" name="<%= nome %>" type="<%= locals.tipo || 'text' %>"<% if (locals.auto) { %> autocomplete="<%= auto %>"<% } %> value="<%= (locals.tipo === 'password') ? '' : valor %>"<% if (erro) { %> aria-invalid="true" aria-describedby="<%= ligacoes %>"<% } %>>
+  <% } %>
+
+  <% if (locals.dica) { %><span class="dica" id="dica-<%= nome %>"><%= dica %></span><% } %>
+  <% if (erro) { %><span class="erro" id="erro-<%= nome %>"><%= erro %></span><% } %>
+</p>

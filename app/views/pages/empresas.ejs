@@ -1,0 +1,27 @@
+<h1>Empresas que contratam</h1>
+<p class="lead">Conheça quem está procurando talentos como você.</p>
+
+<form class="filtros" action="/empresas" method="get" role="search">
+  <p class="campo">
+    <label for="q">Buscar empresa ou setor</label>
+    <input id="q" name="q" type="search" value="<%= q %>" placeholder="Ex.: Tecnologia" data-filtrar="#lista-empresas" data-contador="#contador-empresas" data-singular="empresa encontrada" data-plural="empresas encontradas">
+  </p>
+  <button class="botao" type="submit">Buscar</button>
+</form>
+
+<p role="status" id="contador-empresas"><%= empresas.length %> <%= empresas.length === 1 ? 'empresa encontrada' : 'empresas encontradas' %>.</p>
+
+<ul class="grade" id="lista-empresas">
+  <% empresas.forEach(function (e) { %>
+    <li class="cartao">
+      <p class="etiqueta"><%= e.setor %></p>
+      <h3><%= e.nome %></h3>
+      <p><%= e.sobre %></p>
+      <p class="dica"><%= e.cidade %> &middot; <%= e.tamanho %></p>
+      <p class="rodape-cartao">
+        <strong class="selo"><%= e.abertas %> <%= e.abertas === 1 ? 'vaga aberta' : 'vagas abertas' %></strong>
+        <a class="botao contorno" href="/vagas?q=<%= encodeURIComponent(e.nome) %>">Ver vagas</a>
+      </p>
+    </li>
+  <% }) %>
+</ul>

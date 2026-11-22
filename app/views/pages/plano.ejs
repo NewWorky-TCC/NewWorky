@@ -1,0 +1,10 @@
+<h1>Planos para candidatos</h1>
+<p class="lead">Comece grátis e evolua quando precisar.</p>
+
+<ul class="grade">
+  <% planos.forEach(function (plano) { %>
+    <%- include('../partials/plano-card', { plano: plano }) %>
+  <% }) %>
+</ul>
+
+<p class="dica">Esta versão não processa pagamentos: o plano escolhido é ativado na sua conta apenas para demonstração.</p>

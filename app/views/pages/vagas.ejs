@@ -1,0 +1,43 @@
+<h1>Vagas de emprego</h1>
+<p class="lead">Encontre oportunidades que combinam com o seu perfil.</p>
+
+<form class="filtros" action="/vagas" method="get" role="search" aria-label="Filtrar vagas">
+  <p class="campo">
+    <label for="f-q">Cargo, empresa ou habilidade</label>
+    <input id="f-q" name="q" type="search" value="<%= filtros.q %>" data-filtrar="#lista-vagas" data-contador="#contador-vagas" data-singular="vaga encontrada" data-plural="vagas encontradas">
+  </p>
+  <p class="campo">
+    <label for="f-local">Localização</label>
+    <input id="f-local" name="local" type="text" value="<%= filtros.local %>">
+  </p>
+  <p class="campo">
+    <label for="f-categoria">Área</label>
+    <select id="f-categoria" name="categoria">
+      <option value="">Todas</option>
+      <% categorias.forEach(function (c) { %>
+        <option<%= c === filtros.categoria ? ' selected' : '' %>><%= c %></option>
+      <% }) %>
+    </select>
+  </p>
+  <p class="campo">
+    <label for="f-modelo">Modelo</label>
+    <select id="f-modelo" name="modelo">
+      <option value="">Todos</option>
+      <% modelos.forEach(function (m) { %>
+        <option<%= m === filtros.modelo ? ' selected' : '' %>><%= m %></option>
+      <% }) %>
+    </select>
+  </p>
+  <button class="botao" type="submit">Buscar vagas</button>
+</form>
+
+<p class="barra-resultado">
+  <span role="status" id="contador-vagas"><%= vagas.length %> <%= vagas.length === 1 ? 'vaga encontrada' : 'vagas encontradas' %>.</span>
+  <label class="so-favoritas"><input type="checkbox" id="so-favoritas"> Mostrar só favoritas</label>
+</p>
+
+<ul class="grade" id="lista-vagas">
+  <% vagas.forEach(function (vaga) { %>
+    <%- include('../partials/vaga-card', { vaga: vaga }) %>
+  <% }) %>
+</ul>

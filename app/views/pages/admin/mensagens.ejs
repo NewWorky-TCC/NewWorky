@@ -1,0 +1,27 @@
+<h1>Mensagens</h1>
+<p class="lead">Mensagens enviadas pelo formulário &ldquo;Fale com nossa equipe&rdquo;.</p>
+
+<% if (mensagens.length === 0) { %>
+  <p>Nenhuma mensagem recebida.</p>
+<% } else { %>
+  <ul class="grade mensagens">
+    <% mensagens.forEach(function (m) { %>
+      <li class="cartao<%= m.lida ? '' : ' destaque' %>">
+        <p class="etiqueta"><%= m.lida ? 'Lida' : 'Nova' %> &middot; <%= new Date(m.em).toLocaleString('pt-BR') %></p>
+        <h3><%= m.nome %> &middot; <%= m.empresa %></h3>
+        <p><a href="mailto:<%= m.email %>"><%= m.email %></a></p>
+        <p><%= m.mensagem %></p>
+        <p class="rodape-cartao">
+          <% if (!m.lida) { %>
+            <span>
+              <button type="submit" form="lida-<%= m.id %>" class="botao contorno">Marcar como lida</button>
+            </span>
+          <% } %>
+          <button type="submit" form="excluir-<%= m.id %>" class="botao perigo">Excluir</button>
+        </p>
+        <form id="lida-<%= m.id %>" action="/admin/mensagens/<%= m.id %>/lida" method="post"></form>
+        <form id="excluir-<%= m.id %>" action="/admin/mensagens/<%= m.id %>/excluir" method="post" data-confirmar="Excluir esta mensagem?"></form>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>

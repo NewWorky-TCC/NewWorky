@@ -1,0 +1,8 @@
+[
+  { "id": "nuvem-digital", "nome": "Nuvem Digital", "setor": "Tecnologia", "cidade": "São Paulo, SP", "tamanho": "201-500 pessoas", "sobre": "Software house focada em soluções em nuvem para o varejo, com cultura de aprendizado contínuo e times autônomos." },
+  { "id": "pixel-e-cor", "nome": "Pixel & Cor", "setor": "Design", "cidade": "Curitiba, PR", "tamanho": "11-50 pessoas", "sobre": "Estúdio de design de produto e identidade visual que atende startups e marcas de impacto." },
+  { "id": "datavale", "nome": "DataVale", "setor": "Dados e Analytics", "cidade": "Belo Horizonte, MG", "tamanho": "51-200 pessoas", "sobre": "Consultoria de dados que ajuda empresas a tomar decisões com dashboards, ciência de dados e engenharia de dados." },
+  { "id": "brisa-marketing", "nome": "Brisa Marketing", "setor": "Marketing", "cidade": "Recife, PE", "tamanho": "51-200 pessoas", "sobre": "Agência de marketing digital com foco em performance, conteúdo e social media." },
+  { "id": "orbita-tech", "nome": "Órbita Tech", "setor": "Tecnologia", "cidade": "Porto Alegre, RS", "tamanho": "501-1000 pessoas", "sobre": "Empresa de tecnologia financeira que desenvolve plataformas de pagamento e crédito para pequenos negócios." },
+  { "id": "verde-logistica", "nome": "Verde Logística", "setor": "Logística", "cidade": "Campinas, SP", "tamanho": "201-500 pessoas", "sobre": "Operadora logística com frota sustentável e sistemas próprios de roteirização inteligente." }
+]

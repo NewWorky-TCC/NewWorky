@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title><%= titulo %></title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/site.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/js/acessibilidade.js" defer></script>
+  <script src="/js/geral.js" defer></script>
+  <script src="/js/formularios.js" defer></script>
+  <script src="/js/listas.js" defer></script>
+</head>
+<body class="admin">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <%
+    const menuAdmin = [
+      ['/admin', 'Resumo', true],
+      ['/admin/usuarios', 'Usuários', false],
+      ['/admin/vagas', 'Vagas', false],
+      ['/admin/cursos', 'Cursos', false],
+      ['/admin/mensagens', 'Mensagens', false]
+    ];
+  %>
+  <header class="topo topo-admin">
+    <a class="logo" href="/admin">New<span>Worky</span> <small>Admin</small></a>
+
+    <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-admin">Menu</button>
+
+    <nav id="menu-admin" aria-label="Administração">
+      <ul>
+        <% menuAdmin.forEach(function (item) { %>
+          <% const ativo = item[2] ? pagina === item[0] : pagina.startsWith(item[0]); %>
+          <li>
+            <a href="<%= item[0] %>"<% if (ativo) { %> aria-current="page"<% } %>><%= item[1] %><% if (item[1] === 'Mensagens' && naoLidas > 0) { %> <strong class="selo"><%= naoLidas %></strong><% } %></a>
+          </li>
+        <% }) %>
+      </ul>
+      <form action="/logout" method="post" class="conta">
+        <a href="/">Ver site</a>
+        <button type="submit" class="botao contorno">Sair</button>
+      </form>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <% if (aviso) { %>
+      <p class="aviso" role="status"><%= aviso %></p>
+    <% } %>
+    <%- body %>
+  </main>
+
+  <%- include('../../partials/acessibilidade') %>
+</body>
+</html>

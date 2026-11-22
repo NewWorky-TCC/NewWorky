@@ -1,0 +1,55 @@
+<nav aria-label="Você está em">
+  <ol class="trilha">
+    <li><a href="/">Início</a></li>
+    <li><a href="/vagas">Vagas</a></li>
+    <li aria-current="page"><%= vaga.titulo %></li>
+  </ol>
+</nav>
+
+<article class="cartao detalhe">
+  <header>
+    <p class="etiqueta"><%= vaga.categoria %> &middot; <%= vaga.nivel %></p>
+    <h1><%= vaga.titulo %></h1>
+    <p class="lead"><%= vaga.empresa %></p>
+    <ul class="meta">
+      <li><strong>Local:</strong> <%= vaga.local %></li>
+      <li><strong>Modelo:</strong> <%= vaga.modelo %></li>
+      <li><strong>Salário:</strong> <%= vaga.salarioMin ? reais(vaga.salarioMin) + ' a ' + reais(vaga.salarioMax || vaga.salarioMin) : 'A combinar' %></li>
+      <li><strong>Publicada em:</strong> <time datetime="<%= vaga.publicadaEm %>"><%= vaga.publicadaEm.split('-').reverse().join('/') %></time></li>
+    </ul>
+  </header>
+
+  <section>
+    <h2>Sobre a vaga</h2>
+    <p><%= vaga.descricao %></p>
+  </section>
+
+  <section>
+    <h2>Requisitos</h2>
+    <ul class="check">
+      <% vaga.requisitos.forEach(function (r) { %><li><%= r %></li><% }) %>
+    </ul>
+  </section>
+
+  <% if (vaga.beneficios && vaga.beneficios.length) { %>
+    <section>
+      <h2>Benefícios</h2>
+      <ul class="check">
+        <% vaga.beneficios.forEach(function (b) { %><li><%= b %></li><% }) %>
+      </ul>
+    </section>
+  <% } %>
+
+  <% if (empresa) { %>
+    <section>
+      <h2>Sobre a empresa</h2>
+      <p><%= empresa.sobre %></p>
+    </section>
+  <% } %>
+
+  <form class="acoes" action="/vagas/<%= vaga.id %>/candidatar" method="post">
+    <button class="botao grande" type="submit">Candidatar-se a esta vaga</button>
+    <button type="button" class="botao contorno copiar" data-copiar-link>Copiar link da vaga</button>
+    <span class="dica" role="status" data-copiar-status></span>
+  </form>
+</article>

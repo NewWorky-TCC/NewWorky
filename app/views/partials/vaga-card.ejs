@@ -1,0 +1,13 @@
+<li class="cartao" data-vaga-id="<%= vaga.id %>">
+  <p class="etiqueta"><%= vaga.categoria %> &middot; <%= vaga.nivel %></p>
+  <h3><a href="/vagas/<%= vaga.id %>"><%= vaga.titulo %></a></h3>
+  <p><%= vaga.empresa %> &middot; <%= vaga.local %></p>
+  <ul class="tags">
+    <% vaga.tags.slice(0, 4).forEach(function (tag) { %><li><%= tag %></li><% }) %>
+  </ul>
+  <p class="rodape-cartao">
+    <span><%= vaga.modelo %> &middot; <%= vaga.salarioMin ? reais(vaga.salarioMin) + ' a ' + reais(vaga.salarioMax || vaga.salarioMin) : 'Salário a combinar' %></span>
+    <% if (vaga.match !== null && vaga.match !== undefined) { %><strong class="selo"><%= vaga.match %>% de match</strong><% } %>
+  </p>
+  <button type="button" class="favorito" data-favoritar="<%= vaga.id %>" aria-pressed="false" aria-label="Favoritar a vaga <%= vaga.titulo %>">♡ Favoritar</button>
+</li>

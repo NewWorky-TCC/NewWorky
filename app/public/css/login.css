@@ -122,3 +122,32 @@ form {
     background: transparent;
     cursor: pointer;
 }
+
+/* ===== acréscimos: erros, avisos e olho da senha alinhado ao campo ===== */
+.campo-senha {
+    position: relative;
+    display: block;
+}
+
+.campo-senha .submit-eye {
+    top: 24px; /* metade da altura do campo (48px) */
+}
+
+.erro,
+.aviso {
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.erro {
+    color: #b91c1c;
+    background: #fee2e2;
+}
+
+.aviso {
+    color: #4c1d95;
+    background: #ede9fe;
+}

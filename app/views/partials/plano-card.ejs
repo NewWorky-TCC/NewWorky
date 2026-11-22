@@ -1,0 +1,17 @@
+<li class="cartao<%= plano.destaque ? ' destaque' : '' %>">
+  <% if (plano.destaque) { %><strong class="selo">Mais escolhido</strong><% } %>
+  <h3><%= plano.nome %></h3>
+  <p class="preco"><%= plano.preco === 0 ? 'Grátis' : reais(plano.preco) + '/mês' %></p>
+  <p><%= plano.descricao %></p>
+  <ul class="check">
+    <% plano.recursos.forEach(function (r) { %><li><%= r %></li><% }) %>
+  </ul>
+  <form action="/plano" method="post">
+    <input type="hidden" name="plano" value="<%= plano.id %>">
+    <% if (usuario && usuario.plano === plano.id) { %>
+      <button type="button" class="botao" disabled>Plano atual</button>
+    <% } else { %>
+      <button type="submit" class="botao<%= plano.destaque ? '' : ' contorno' %>">Escolher <%= plano.nome %></button>
+    <% } %>
+  </form>
+</li>

@@ -1,0 +1,32 @@
+<h1>Cursos para você</h1>
+<p class="lead">Aprenda no seu ritmo e acompanhe seu progresso.</p>
+
+<form class="filtros" action="/cursos" method="get" aria-label="Filtrar cursos">
+  <p class="campo">
+    <label for="c-categoria">Área</label>
+    <select id="c-categoria" name="categoria">
+      <option value="">Todas</option>
+      <% categorias.forEach(function (c) { %>
+        <option<%= c === filtros.categoria ? ' selected' : '' %>><%= c %></option>
+      <% }) %>
+    </select>
+  </p>
+  <p class="campo">
+    <label for="c-nivel">Nível</label>
+    <select id="c-nivel" name="nivel">
+      <option value="">Todos</option>
+      <% niveis.forEach(function (n) { %>
+        <option<%= n === filtros.nivel ? ' selected' : '' %>><%= n %></option>
+      <% }) %>
+    </select>
+  </p>
+  <button class="botao" type="submit">Filtrar</button>
+</form>
+
+<p role="status"><%= cursos.length %> <%= cursos.length === 1 ? 'curso encontrado' : 'cursos encontrados' %>.</p>
+
+<ul class="grade">
+  <% cursos.forEach(function (curso) { %>
+    <%- include('../partials/curso-card', { curso: curso }) %>
+  <% }) %>
+</ul>

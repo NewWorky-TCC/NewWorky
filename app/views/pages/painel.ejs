@@ -1,0 +1,91 @@
+<h1>Olá, <%= usuario.nome.split(' ')[0] %>!</h1>
+<p class="lead"><%= usuario.tipo === 'empresa' ? usuario.empresa.nome : 'Acompanhe suas candidaturas e cursos.' %></p>
+
+<% if (usuario.tipo === 'candidato') { %>
+
+  <section class="cartao" aria-labelledby="t-cand">
+    <h2 id="t-cand">Minhas candidaturas</h2>
+    <% if (candidaturas.length === 0) { %>
+      <p>Você ainda não se candidatou. <a href="/vagas">Buscar vagas</a></p>
+    <% } else { %>
+      <ul class="lista">
+        <% candidaturas.forEach(function (c) { %>
+          <li>
+            <% if (c.vaga) { %>
+              <a href="/vagas/<%= c.vaga.id %>"><%= c.vaga.titulo %></a> &middot; <%= c.vaga.empresa %>
+            <% } else { %>
+              Vaga removida
+            <% } %>
+            <span class="dica">Enviada em <%= new Date(c.em).toLocaleDateString('pt-BR') %></span>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <section class="cartao" aria-labelledby="t-prog">
+    <h2 id="t-prog">Seu progresso nos cursos</h2>
+    <% if (!usuario.cursos || usuario.cursos.length === 0) { %>
+      <p>Nenhum curso iniciado. <a href="/cursos">Ver cursos</a></p>
+    <% } else { %>
+      <ul class="lista">
+        <% usuario.cursos.forEach(function (c) { %>
+          <li>
+            <%= c.titulo %>
+            <progress value="<%= c.progresso %>" max="100" aria-label="Progresso em <%= c.titulo %>"></progress>
+            <form action="/painel/cursos/<%= c.id %>/avancar" method="post">
+              <%= c.progresso %>%
+              <button class="botao contorno" type="submit"<%= c.progresso >= 100 ? ' disabled' : '' %>>+25%</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <section class="cartao" aria-labelledby="t-plano">
+    <h2 id="t-plano">Seu plano</h2>
+    <p>Plano atual: <%= plano ? plano.nome : 'Gratuito' %>.</p>
+    <a class="botao contorno" href="/plano">Ver planos</a>
+  </section>
+
+<% } else { %>
+
+  <section class="cartao" aria-labelledby="t-pub">
+    <h2 id="t-pub">Publicar nova vaga</h2>
+    <form action="/painel/vagas" method="post">
+      <%- include('../partials/campo', { rotulo: 'Título da vaga', nome: 'titulo' }) %>
+      <%- include('../partials/campo', { rotulo: 'Área', nome: 'categoria', opcoes: categorias }) %>
+      <%- include('../partials/campo', { rotulo: 'Nível', nome: 'nivel', opcoes: niveis }) %>
+      <%- include('../partials/campo', { rotulo: 'Modelo', nome: 'modelo', opcoes: modelos }) %>
+      <%- include('../partials/campo', { rotulo: 'Local (deixe em branco se for remoto)', nome: 'local' }) %>
+      <%- include('../partials/campo', { rotulo: 'Salário mínimo (R$)', nome: 'salarioMin', tipo: 'number' }) %>
+      <%- include('../partials/campo', { rotulo: 'Salário máximo (R$)', nome: 'salarioMax', tipo: 'number' }) %>
+      <%- include('../partials/campo', { rotulo: 'Descrição', nome: 'descricao', tipo: 'textarea' }) %>
+      <%- include('../partials/campo', { rotulo: 'Requisitos (um por linha)', nome: 'requisitos', tipo: 'textarea', linhas: 3 }) %>
+      <%- include('../partials/campo', { rotulo: 'Benefícios (um por linha)', nome: 'beneficios', tipo: 'textarea', linhas: 3 }) %>
+      <%- include('../partials/campo', { rotulo: 'Palavras-chave (separadas por vírgula)', nome: 'tags' }) %>
+      <button class="botao" type="submit">Publicar vaga</button>
+    </form>
+  </section>
+
+  <section class="cartao" aria-labelledby="t-minhas">
+    <h2 id="t-minhas">Minhas vagas publicadas</h2>
+    <% if (minhasVagas.length === 0) { %>
+      <p>Você ainda não publicou vagas.</p>
+    <% } else { %>
+      <ul class="lista">
+        <% minhasVagas.forEach(function (v) { %>
+          <li>
+            <a href="/vagas/<%= v.id %>"><%= v.titulo %></a> &middot; <%= v.local %>
+            <span class="dica">(<%= v.candidatos %> <%= v.candidatos === 1 ? 'candidato' : 'candidatos' %>)</span>
+            <form action="/painel/vagas/<%= v.id %>/excluir" method="post" data-confirmar="Excluir a vaga &quot;<%= v.titulo %>&quot;?">
+              <button class="botao contorno" type="submit">Excluir<span class="so-leitor"> <%= v.titulo %></span></button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+<% } %>

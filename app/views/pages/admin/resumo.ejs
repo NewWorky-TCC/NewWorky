@@ -1,0 +1,26 @@
+<h1>Resumo</h1>
+<p class="lead">Visão geral da plataforma.</p>
+
+<ul class="grade indicadores">
+  <li class="cartao"><strong><%= totais.candidatos %></strong> candidatos</li>
+  <li class="cartao"><strong><%= totais.empresas %></strong> empresas</li>
+  <li class="cartao"><strong><%= totais.vagas %></strong> vagas</li>
+  <li class="cartao"><strong><%= totais.cursos %></strong> cursos</li>
+  <li class="cartao"><strong><%= totais.candidaturas %></strong> candidaturas</li>
+</ul>
+
+<section class="cartao" aria-labelledby="ult">
+  <h2 id="ult">Últimos cadastros</h2>
+  <% if (ultimos.length === 0) { %>
+    <p>Nenhum cadastro ainda.</p>
+  <% } else { %>
+    <ul class="lista">
+      <% ultimos.forEach(function (u) { %>
+        <li>
+          <%= u.nome %> <span class="dica"><%= u.email %> &middot; <%= u.tipo %></span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+  <a class="botao contorno" href="/admin/usuarios">Ver todos os usuários</a>
+</section>

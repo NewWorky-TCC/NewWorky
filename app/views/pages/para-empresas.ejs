@@ -1,0 +1,37 @@
+<section class="hero">
+  <h1>Contrate talentos que <span class="destaque-texto">combinam com sua empresa.</span></h1>
+  <p class="lead">Publique vagas, receba candidaturas compatíveis e acompanhe tudo em um único painel.</p>
+  <p>
+    <a class="botao grande" href="/cadastro?tipo=empresa">Cadastrar empresa</a>
+    <a class="botao contorno grande" href="#contato">Falar com a equipe</a>
+  </p>
+</section>
+
+<section aria-labelledby="vantagens">
+  <h2 id="vantagens">Por que contratar pelo NewWorky</h2>
+  <ul class="grade">
+    <li class="cartao"><h3>Match inteligente</h3><p>Candidatos cujas áreas e habilidades combinam com a vaga.</p></li>
+    <li class="cartao"><h3>Painel simples</h3><p>Publique, exclua e acompanhe o número de candidaturas.</p></li>
+    <li class="cartao"><h3>Página para cada vaga</h3><p>Cada vaga tem um endereço próprio para divulgar.</p></li>
+  </ul>
+</section>
+
+<section aria-labelledby="planos-emp">
+  <h2 id="planos-emp">Planos para empresas</h2>
+  <ul class="grade">
+    <% planos.forEach(function (plano) { %>
+      <%- include('../partials/plano-card', { plano: plano }) %>
+    <% }) %>
+  </ul>
+</section>
+
+<section id="contato" aria-labelledby="contato-titulo">
+  <h2 id="contato-titulo">Fale com nossa equipe</h2>
+  <form action="/contato" method="post">
+    <%- include('../partials/campo', { rotulo: 'Seu nome', nome: 'nome' }) %>
+    <%- include('../partials/campo', { rotulo: 'E-mail corporativo', nome: 'email', tipo: 'email' }) %>
+    <%- include('../partials/campo', { rotulo: 'Empresa', nome: 'empresa' }) %>
+    <%- include('../partials/campo', { rotulo: 'Como podemos ajudar?', nome: 'mensagem', tipo: 'textarea' }) %>
+    <button class="botao" type="submit">Enviar mensagem</button>
+  </form>
+</section>

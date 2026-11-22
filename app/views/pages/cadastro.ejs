@@ -1,51 +1,91 @@
+<%
+  /* Tipo de conta: candidato (padrão) ou empresa */
+  const tipo = valores.tipo === 'empresa' ? 'empresa' : 'candidato';
+  const v = function (nome) { return valores[nome] || ''; };
+%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - NewWorky</title>
+    <title><%= titulo %></title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/css/cadastro.css">
+    <script src="/js/formularios.js" defer></script>
 </head>
 
 <body>
     <figure>
-        <form class="cadastro-form">
-            <img class="logo" src=" imagens/Logo NewWorky.svg " alt="Logo-newworky " />
-            <h1>Bem-vindo !!!!
-            </h1>
-            <p>Faça cadastro para criar sua conta !</p>
+        <form class="cadastro-form" action="/cadastro" method="post" novalidate>
+            <img class="logo" src="/imagens/Logo NewWorky.svg" alt="Logo NewWorky">
 
-            <input type="text" placeholder="Nome Completo"><br>
-            <input type="email" placeholder="E-mail"><br>
+            <h1>Bem-vindo!</h1>
+            <p>Faça cadastro para criar sua conta</p>
 
-            <input type="password" placeholder="Senha"><br>
+            <nav class="tipos" aria-label="Tipo de conta">
+                <a href="/cadastro"<% if (tipo === 'candidato') { %> aria-current="page"<% } %>>Sou candidato(a)</a>
+                <a href="/cadastro?tipo=empresa"<% if (tipo === 'empresa') { %> aria-current="page"<% } %>>Sou empresa</a>
+            </nav>
 
-            <input type="password" placeholder="Confirmar Senha">
+            <% if (Object.keys(erros).length) { %><p class="erro" role="alert">Corrija os campos destacados.</p><% } %>
 
+            <input type="hidden" name="tipo" value="<%= tipo %>">
 
-            <form class="cadastro-form"><br>
+            <input type="text" id="campo-nome" name="nome" placeholder="Nome completo" aria-label="Nome completo" value="<%= v('nome') %>" autocomplete="name">
+            <% if (erros.nome) { %><span class="erro"><%= erros.nome %></span><% } %>
 
-                <button class="btn-login" type="submit">
-        Criar conta
-    </button>
+            <input type="email" id="campo-email" name="email" placeholder="E-mail" aria-label="E-mail" value="<%= v('email') %>" autocomplete="email">
+            <% if (erros.email) { %><span class="erro"><%= erros.email %></span><% } %>
 
-                <div>
-                    <span></span>
-                    <p>ou continue com</p>
-                    <sppan>
-                        </span>
-                </div>
+            <input type="password" id="campo-senha" name="senha" placeholder="Senha (mín. 8, com letras e números)" aria-label="Senha" autocomplete="new-password">
+            <% if (erros.senha) { %><span class="erro"><%= erros.senha %></span><% } %>
 
+            <input type="password" id="campo-senha2" name="senha2" placeholder="Confirmar senha" aria-label="Confirmar senha" autocomplete="new-password">
+            <% if (erros.senha2) { %><span class="erro"><%= erros.senha2 %></span><% } %>
 
-                </div>
+            <input type="text" id="campo-cidade" name="cidade" placeholder="Cidade (opcional)" aria-label="Cidade" value="<%= v('cidade') %>" autocomplete="address-level2">
 
-                <p class="Login">
-                    Já tem uma conta?
-                    <a href="/login">Login</a>
-                </p>
+            <% if (tipo === 'candidato') { %>
+                <select id="campo-area" name="area" aria-label="Área de interesse">
+                    <option value="">Área de interesse</option>
+                    <% categorias.forEach(function (c) { %>
+                        <option<%= c === v('area') ? ' selected' : '' %>><%= c %></option>
+                    <% }) %>
+                </select>
+                <% if (erros.area) { %><span class="erro"><%= erros.area %></span><% } %>
 
-            </form>
+                <input type="text" id="campo-habilidades" name="habilidades" placeholder="Habilidades (ex.: React, SQL, Figma)" aria-label="Habilidades separadas por vírgula" value="<%= v('habilidades') %>">
+            <% } else { %>
+                <input type="text" id="campo-empresaNome" name="empresaNome" placeholder="Nome da empresa" aria-label="Nome da empresa" value="<%= v('empresaNome') %>">
+                <% if (erros.empresaNome) { %><span class="erro"><%= erros.empresaNome %></span><% } %>
+
+                <input type="text" id="campo-cnpj" name="cnpj" placeholder="CNPJ (14 números)" aria-label="CNPJ" value="<%= v('cnpj') %>">
+                <% if (erros.cnpj) { %><span class="erro"><%= erros.cnpj %></span><% } %>
+
+                <input type="text" id="campo-setor" name="setor" placeholder="Setor de atuação" aria-label="Setor de atuação" value="<%= v('setor') %>">
+                <% if (erros.setor) { %><span class="erro"><%= erros.setor %></span><% } %>
+            <% } %>
+
+            <label class="aceite">
+                <input type="checkbox" name="aceite"<%= valores.aceite ? ' checked' : '' %>>
+                Li e aceito a <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
+            </label>
+            <% if (erros.aceite) { %><span class="erro"><%= erros.aceite %></span><% } %>
+
+            <button class="btn-login" type="submit">
+                Criar conta
+            </button>
+
+            <p class="cadastro">
+                Já tem uma conta?
+                <a href="/login">Login</a>
+            </p>
+
+            <p class="cadastro">
+                <a href="/">Voltar para o site</a>
+            </p>
+
         </form>
     </figure>
 </body>

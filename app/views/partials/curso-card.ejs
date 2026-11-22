@@ -1,0 +1,20 @@
+<li class="cartao">
+  <p class="etiqueta"><%= curso.categoria %> &middot; <%= curso.nivel %></p>
+  <h3><%= curso.titulo %></h3>
+  <p><%= curso.descricao %></p>
+  <p class="dica"><%= curso.horas %> horas</p>
+
+  <% if (curso.progresso !== null && curso.progresso !== undefined) { %>
+    <progress value="<%= curso.progresso %>" max="100" aria-label="Progresso em <%= curso.titulo %>"></progress>
+    <p class="dica"><%= curso.progresso %>% concluído</p>
+  <% } %>
+
+  <form class="rodape-cartao" action="/cursos/<%= curso.id %>/iniciar" method="post">
+    <strong class="selo"><%= curso.gratuito ? 'Gratuito' : 'Plano Pro' %></strong>
+    <% if (curso.progresso === null || curso.progresso === undefined) { %>
+      <button type="submit" class="botao contorno">Iniciar curso</button>
+    <% } else { %>
+      <a href="/painel" class="botao contorno">Ver no painel</a>
+    <% } %>
+  </form>
+</li>

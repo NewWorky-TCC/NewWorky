@@ -1,0 +1,41 @@
+<h1>Vagas</h1>
+
+<form class="filtros" role="search" data-sem-envio>
+  <p class="campo">
+    <label for="busca">Buscar por título, empresa ou área</label>
+    <input id="busca" type="search" data-filtrar="#corpo-vagas" data-contador="#contador-vagas" data-singular="vaga encontrada" data-plural="vagas encontradas">
+  </p>
+</form>
+
+<p role="status" id="contador-vagas"><%= vagas.length %> <%= vagas.length === 1 ? 'vaga encontrada' : 'vagas encontradas' %>.</p>
+
+<section class="rolagem" tabindex="0" aria-label="Tabela de vagas">
+  <table class="tabela" data-ordenavel>
+    <thead>
+      <tr>
+        <th scope="col"><button type="button" class="ordenar">Título</button></th>
+        <th scope="col"><button type="button" class="ordenar">Empresa</button></th>
+        <th scope="col"><button type="button" class="ordenar">Área</button></th>
+        <th scope="col"><button type="button" class="ordenar">Candidatos</button></th>
+        <th scope="col"><button type="button" class="ordenar">Publicada</button></th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody id="corpo-vagas">
+      <% vagas.forEach(function (v) { %>
+        <tr>
+          <td data-rotulo="Título"><a href="/vagas/<%= v.id %>"><%= v.titulo %></a></td>
+          <td data-rotulo="Empresa"><%= v.empresa %></td>
+          <td data-rotulo="Área"><%= v.categoria %></td>
+          <td data-rotulo="Candidatos"><%= v.candidatos %></td>
+          <td data-rotulo="Publicada" data-ordem="<%= v.publicadaEm %>"><%= v.publicadaEm.split('-').reverse().join('/') %></td>
+          <td data-rotulo="Ações" class="acoes-tabela">
+            <form action="/admin/vagas/<%= v.id %>/excluir" method="post" data-confirmar="Excluir a vaga &quot;<%= v.titulo %>&quot;?">
+              <button type="submit" class="botao perigo">Excluir</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>

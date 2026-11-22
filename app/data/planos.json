@@ -1,0 +1,8 @@
+[
+  { "id": "candidato-gratis", "publico": "candidato", "nome": "Gratuito", "preco": 0, "destaque": false, "descricao": "Para começar a buscar oportunidades.", "recursos": ["Busca de vagas ilimitada", "Até 5 candidaturas por mês", "Perfil profissional", "Cursos gratuitos"] },
+  { "id": "candidato-pro", "publico": "candidato", "nome": "Pro", "preco": 29.9, "destaque": true, "descricao": "Para quem quer se destacar nos processos.", "recursos": ["Candidaturas ilimitadas", "Match com pontuação detalhada", "Perfil em destaque para empresas", "Todos os cursos da plataforma"] },
+  { "id": "candidato-premium", "publico": "candidato", "nome": "Premium", "preco": 59.9, "destaque": false, "descricao": "Acompanhamento completo de carreira.", "recursos": ["Tudo do plano Pro", "Revisão de currículo por especialistas", "Simulação de entrevistas", "Mentoria mensal em grupo"] },
+  { "id": "empresa-start", "publico": "empresa", "nome": "Start", "preco": 0, "destaque": false, "descricao": "Para pequenas empresas que estão começando.", "recursos": ["1 vaga ativa", "Painel de candidaturas", "Perfil da empresa"] },
+  { "id": "empresa-growth", "publico": "empresa", "nome": "Growth", "preco": 249, "destaque": true, "descricao": "Para empresas que contratam com frequência.", "recursos": ["Até 10 vagas ativas", "Match automático de candidatos", "Vagas em destaque na busca", "Relatórios de contratação"] },
+  { "id": "empresa-enterprise", "publico": "empresa", "nome": "Enterprise", "preco": 799, "destaque": false, "descricao": "Para grandes operações de recrutamento.", "recursos": ["Vagas ilimitadas", "Gerente de contas dedicado", "Integração com ATS", "Marca empregadora personalizada"] }
+]

@@ -133,3 +133,96 @@ form {
     margin: 0 auto 35px;
     flex-shrink: 0;
 }
+
+/* ===== acréscimos: erros, abas de tipo de conta, select e checkbox ===== */
+.tipos {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 20px;
+}
+
+.tipos a {
+    padding: 8px 14px;
+    border: 2px solid #ddd;
+    border-radius: 99px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.tipos a[aria-current="page"] {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: white;
+}
+
+.cadastro-form select {
+    display: block;
+    width: 90%;
+    height: 48px;
+    margin: 0 auto 20px;
+    padding: 0 15px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background-color: #f8f8fa;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+}
+
+.aceite {
+    display: block;
+    margin: 0 0 20px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.cadastro-form .aceite input {
+    display: inline;
+    width: auto;
+    height: auto;
+    margin: 0 8px 0 0;
+}
+
+.erro {
+    display: block;
+    margin: -12px auto 16px;
+    width: 90%;
+    color: #b91c1c;
+    font-size: 13px;
+    text-align: left;
+}
+
+p.erro {
+    margin: 0 0 16px;
+    width: auto;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #fee2e2;
+    font-size: 14px;
+}
+
+/* botão e medidor criados por /js/formularios.js */
+.ver-senha {
+    margin: -12px 0 16px;
+    padding: 4px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: transparent;
+    color: #6d28d9;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+meter {
+    display: block;
+    width: 90%;
+    margin: 0 auto 4px;
+}
+
+.dica {
+    display: block;
+    margin-bottom: 16px;
+    color: #777;
+    font-size: 13px;
+}
