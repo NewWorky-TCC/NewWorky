@@ -7,32 +7,34 @@
     ['/para-empresas', 'Para empresas']
   ];
 %>
-<header class="topo">
-  <a class="logo" href="/">New<span>Worky</span></a>
+    <header class="topo">
+        <a href="/">
+            <img src="/imagens/Logo NewWorky.svg" class="logo" alt="Logo NewWorky">
+        </a>
 
-  <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">Menu</button>
+        <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
-  <nav id="menu-principal" aria-label="Principal">
-    <ul>
-      <% menu.forEach(function (item) { %>
-        <li><a href="<%= item[0] %>"<% if (pagina.startsWith(item[0])) { %> aria-current="page"<% } %>><%= item[1] %></a></li>
-      <% }) %>
-    </ul>
+        <nav id="menu-principal" aria-label="Principal">
+            <ul>
+                <% menu.forEach(function (item) { %>
+                    <li><a href="<%= item[0] %>" <% if (pagina.startsWith(item[0])) { %> aria-current="page"<% } %>><%= item[1] %></a></li>
+                    <% }) %>
+            </ul>
 
-    <% if (usuario) { %>
-      <form action="/logout" method="post" class="conta">
-        <% if (usuario.tipo === 'admin') { %>
-          <a href="/admin">Área admin</a>
-        <% } else { %>
-          <a href="/painel">Olá, <%= usuario.nome.split(' ')[0] %></a>
-        <% } %>
-        <button type="submit" class="botao contorno">Sair</button>
-      </form>
-    <% } else { %>
-      <p class="conta">
-        <a href="/login">Entrar</a>
-        <a href="/cadastro" class="botao">Criar conta</a>
-      </p>
-    <% } %>
-  </nav>
-</header>
+            <% if (usuario) { %>
+                <form action="/logout" method="post" class="conta">
+                    <% if (usuario.tipo === 'admin') { %>
+                        <a href="/admin">Área admin</a>
+                        <% } else { %>
+                            <a href="/painel">Olá, <%= usuario.nome.split(' ')[0] %></a>
+                            <% } %>
+                                <button type="submit" class="botao contorno">Sair</button>
+                </form>
+                <% } else { %>
+                    <p class="conta">
+                        <a href="/login">Entrar</a>
+                        <a href="/cadastro" class="botao">Criar conta</a>
+                    </p>
+                    <% } %>
+        </nav>
+    </header>
