@@ -3,13 +3,30 @@
     gap: 20px;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* Quando a tela tiver até 768px */
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+figure {
+    width: 100%;
+    max-width: 500px;
+    margin: 0;
 }
 
 body {
@@ -134,7 +151,9 @@ form {
     flex-shrink: 0;
 }
 
+
 /* ===== acréscimos: erros, abas de tipo de conta, select e checkbox ===== */
+
 .tipos {
     display: flex;
     justify-content: center;
@@ -202,7 +221,9 @@ p.erro {
     font-size: 14px;
 }
 
+
 /* botão e medidor criados por /js/formularios.js */
+
 .ver-senha {
     margin: -12px 0 16px;
     padding: 4px 10px;

@@ -1,16 +1,27 @@
-@media (max-width: 600px) {
-    .login-form {
-        padding: 25px;
-    }
-    .login-form h1 {
-        font-size: 24px;
-    }
-    .login-form p {
-        font-size: 14px;
-    }
-    input {
-        width: 100%;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+figure {
+    width: 100%;
+    max-width: 500px;
+    margin: 0;
 }
 
 .login form input {
@@ -123,14 +134,17 @@ form {
     cursor: pointer;
 }
 
+
 /* ===== acréscimos: erros, avisos e olho da senha alinhado ao campo ===== */
+
 .campo-senha {
     position: relative;
     display: block;
 }
 
 .campo-senha .submit-eye {
-    top: 24px; /* metade da altura do campo (48px) */
+    top: 24px;
+    /* metade da altura do campo (48px) */
 }
 
 .erro,
