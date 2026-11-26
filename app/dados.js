@@ -66,7 +66,7 @@ function garantirAdmin() {
   if (users.some((u) => u.tipo === 'admin')) return;
 
   const email = (process.env.ADMIN_EMAIL || 'admin@newworky.com').toLowerCase();
-  const senha = process.env.ADMIN_SENHA || 'admin123';
+  const senha = process.env.ADMIN_SENHA || 'Admin123@';
   users.push({
     id: novoId(),
     tipo: 'admin',
