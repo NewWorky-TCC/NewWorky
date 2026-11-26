@@ -63,10 +63,22 @@ function todasVagas() {
 // Cria o primeiro administrador se ainda não existir nenhum
 function garantirAdmin() {
   const users = ler('users');
-  if (users.some((u) => u.tipo === 'admin')) return;
 
   const email = (process.env.ADMIN_EMAIL || 'admin@newworky.com').toLowerCase();
   const senha = process.env.ADMIN_SENHA || 'Admin123@';
+
+  const adminExistente = users.find((u) => u.tipo === 'admin');
+
+  if (adminExistente) {
+    adminExistente.email = email;
+    adminExistente.senha = bcrypt.hashSync(senha, 10);
+
+    salvar('users', users);
+
+    console.log('Administrador atualizado!');
+    return;
+  }
+
   users.push({
     id: novoId(),
     tipo: 'admin',
@@ -77,8 +89,10 @@ function garantirAdmin() {
     plano: null,
     criadoEm: new Date().toISOString(),
   });
+
   salvar('users', users);
-  console.log('Administrador criado -> e-mail: ' + email + ' | senha: ' + senha + ' (troque depois!)');
+
+  console.log('Administrador criado!');
 }
 
 module.exports = {
